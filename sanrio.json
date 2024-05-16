@@ -1,0 +1,67 @@
+{
+  "badtz-maru": {
+    "name": "Badtz-Maru",
+    "japanese_name": "バッドばつ丸",
+    "color": "black",
+    "description": "Bad Badtz-Maru (バッドばつ丸, Baddo batsu maru) is a character designed by Sanrio. He is a black penguin with spiky hair and a commonly un-amused face. His birthday is on the first of April, April Fool's Day.",
+    "birthday": "April 1",
+    "species": "Penguin",
+    "creator": "Sanrio",
+    "first_appearance": "1993",
+    "likes": ["pranks", "fun"],
+    "dislikes": ["being bored", "losing"],
+    "img": "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTd1bXQ3emU5cXlsdjZ5cWZta3Q3c3I3bXlvNGlhN3Y0ZnJpb3lnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FAeq86tKinXthXyfRu/giphy.gif"
+  },
+  "hello-kitty": {
+    "name": "Hello Kitty",
+    "japanese_name": "ハローキティ",
+    "color": "white",
+    "description": "Hello Kitty (ハローキティ, Harō Kiti) is a fictional character produced by the Japanese company Sanrio. She is depicted as a cute anthropomorphic white cat with a red bow.",
+    "birthday": "November 1",
+    "species": "Cat",
+    "creator": "Yuko Shimizu",
+    "first_appearance": "1974",
+    "likes": ["apple pie", "small cute things"],
+    "dislikes": ["mean people", "being sad"],
+    "img": "https://media2.giphy.com/media/Cx0ZDb335IDYxOW7cI/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
+  },
+  "my-melody": {
+    "name": "My Melody",
+    "japanese_name": "マイメロディ",
+    "color": "white",
+    "description": "My Melody (マイメロディ, Mai Merodī) is a Sanrio character who is a little girl rabbit with a hood. She is often depicted with her hood covering her ears.",
+    "birthday": "January 18",
+    "species": "Rabbit",
+    "creator": "Sanrio",
+    "first_appearance": "1975",
+    "likes": ["baking", "strawberries"],
+    "dislikes": ["mischief", "getting lost"],
+    "img": "https://media0.giphy.com/media/fFPaFk6iMUPvI1Skox/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
+  },
+  "cinnamoroll": {
+    "name": "Cinnamoroll",
+    "japanese_name": "シナモロール",
+    "color": "white",
+    "description": "Cinnamoroll (シナモロール, Shinamorōru) is a Sanrio character who is a white puppy with long ears and a tail that looks like a cinnamon roll.",
+    "birthday": "March 6",
+    "species": "Puppy",
+    "creator": "Sanrio",
+    "first_appearance": "2002",
+    "likes": ["sky", "puppies"],
+    "dislikes": ["being alone", "loud noises"],
+    "img": "https://media1.giphy.com/media/X5Lta1bjuULTubmGzR/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
+  },
+  "keroppi": {
+    "name": "Keroppi",
+    "japanese_name": "けろけろけろっぴ",
+    "color": "green",
+    "description": "Keroppi (けろけろけろっぴ, Kerokero Keroppi) is a Sanrio character who is a frog. He is depicted as having large eyes and a V-shaped mouth.",
+    "birthday": "July 10",
+    "species": "Frog",
+    "creator": "Sanrio",
+    "first_appearance": "1988",
+    "likes": ["swimming", "singing"],
+    "dislikes": ["cold weather", "being indoors"],
+    "img": "https://media0.giphy.com/media/4WDKiUenkve2ZvLoTp/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
+  }
+}
