@@ -89,7 +89,8 @@ app.post("/login", async (req, res) => {
         users[username] = {
           "username": username,
           "salt": salt,
-          "hash": hash
+          "hash": hash,
+          "character": null
         }
 
         await fs.writeFile('account-manager.json', JSON.stringify(users));
@@ -133,7 +134,7 @@ app.post("/setcharacter", async (req, res) => {
 });
 
 app.post("/getcharacter", async (req, res) => {
-  const username = req.body;
+  const {username} = req.body;
 
   if (!username) {
     res.status(400).type('text').send("Missing username");
@@ -148,12 +149,7 @@ app.post("/getcharacter", async (req, res) => {
     }
 
     const user = accounts[username];
-
-    if (user.character) {
-      res.status(200).json({character: user.character});
-    } else {
-      res.status(200).json({character: null});
-    }
+    res.status(200).json(user.character);
   } catch (error) {
     res.status(500).type('text').send("Server-side error");
   }

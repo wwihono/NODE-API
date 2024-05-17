@@ -30,18 +30,19 @@
       let saveFile = await fetch("/getcharacter", {method: 'POST', body: form});
       await statusCheck(saveFile);
       let data = await saveFile.json();
-      if (data.character != null) {
-        currName = data.character.name;
-        currLevel = data.character.level;
-        currImg = data.character.img;
+      console.log(data);
+      if (data != null) {
+        currName = data.name;
+        currLevel = data.level;
+        currImg = data.img;
         return true;
       } else {
         return false;
       }
     } catch (err) {
       handleError(err);
+      return false;
     }
-    return false;
   }
 
   async function openSelectionWindow() {
@@ -114,6 +115,9 @@
     form.append("character", this.alt);
     form.append("level", 1);
     form.append("img", this.src);
+    currName = this.alt;
+    currLevel = 1;
+    currImg = this.src;
 
     try {
       let file = await fetch("/setcharacter", {method: "POST", body: form});
