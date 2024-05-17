@@ -93,12 +93,14 @@ app.get("/getSanrio/:name", async (req, res) => {
 
       res.status(good).json(data[character]);
     } else {
-
-      res.status(bad).type("text").send("not a valid Sanrio character");
+      res.status(bad)
+        .type("text")
+        .send("not a valid Sanrio character");
     }
   } catch (err) {
-
-    res.status(weird).type('text').send("Something went wrong while parsing file");
+    res.status(weird)
+      .type('text')
+      .send("Something went wrong while parsing file");
   }
 });
 
@@ -108,8 +110,9 @@ app.post("/login", async (req, res) => {
     let password = req.body.password;
 
     if (!username || !password) {
-
-      res.status(bad).type('text').send("Missing password or username");
+      res.status(bad)
+        .type('text')
+        .send("Missing password or username");
     } else {
       let users = await fs.readFile('account-manager.json', 'utf-8');
       users = JSON.parse(users);
@@ -119,11 +122,13 @@ app.post("/login", async (req, res) => {
         let isValid = verifyPassword(password, salt, hash);
         
         if (isValid){
-
-          res.status(200).type('text').send("successfully logged in");
+          res.status(200)
+            .type('text')
+            .send("successfully logged in");
         } else {
-
-          res.status(400).type('text').send('incorrect password or username');
+          res.status(bad)
+            .type('text')
+            .send('incorrect password or username');
         }
       } else {
         const {salt, hash} = hashPasswords(password);
@@ -136,12 +141,15 @@ app.post("/login", async (req, res) => {
 
         await fs.writeFile('account-manager.json', JSON.stringify(users));
 
-        res.status(good).type('text').send("account created successfully");
+        res.status(good)
+          .type('text')
+          .send("account created successfully");
       }
   } 
   } catch (err) {
-
-    res.status(weird).type('text').send("some server side error");
+    res.status(weird)
+      .type('text')
+      .send("some server side error");
   }
 });
 
@@ -150,8 +158,9 @@ app.post("/setcharacter", async (req, res) => {
   const { username, character, level, img } = req.body;
 
   if (!username || !character || !img || !level) {
-
-    return res.status(bad).type('text').send("Missing body params");
+    res.status(bad)
+      .type('text')
+      .send("Missing body params");
   }
 
   try {
@@ -159,8 +168,9 @@ app.post("/setcharacter", async (req, res) => {
     accounts = JSON.parse(accounts);
 
     if (!accounts[username]) {
-
-      return res.status(bad).type('text').send("User not found");
+      res.status(bad)
+        .type('text')
+        .send("User not found");
     }
 
     const user = accounts[username];
@@ -172,10 +182,13 @@ app.post("/setcharacter", async (req, res) => {
 
     await fs.writeFile('account-manager.json', JSON.stringify(accounts, null, prettyPrint));
 
-    res.status(good).type('text').send("account created");
+    res.status(good)
+      .type('text')
+      .send("account created");
   } catch (error) {
-
-    res.status(weird).type('text').send("Server-side error");
+    res.status(weird)
+      .type('text')
+      .send("Server-side error");
   }
 });
 
@@ -183,8 +196,9 @@ app.post("/getcharacter", async (req, res) => {
   const {username} = req.body;
 
   if (!username) {
-
-    res.status(bad).type('text').send("Missing username");
+    res.status(bad)
+      .type('text')
+      .send("Missing username");
   }
 
   try {
@@ -192,8 +206,9 @@ app.post("/getcharacter", async (req, res) => {
     accounts = JSON.parse(accounts);
 
     if (!accounts[username]) {
-
-      res.status(bad).type('text').send("User not found");
+      res.status(bad)
+        .type('text')
+        .send("User not found");
     }
 
     const user = accounts[username];
@@ -201,7 +216,9 @@ app.post("/getcharacter", async (req, res) => {
     res.status(good).json(user.character);
   } catch (error) {
 
-    res.status(weird).type('text').send("Server-side error");
+    res.status(weird)
+      .type('text')
+      .send("Server-side error");
   }
 });
 
