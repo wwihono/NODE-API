@@ -1,1 +1,28 @@
-{"cattos":{"username":"cattos","salt":"cadde47b0ed7112f3868f769aa5cdf22","hash":"16943c4311fb971b364a1a88398ff905c1fbe89f504249c8f035ff4ed32b3f35","character":{"name":"Cinnabon","level":"1","img":"https://media1.giphy.com/media/X5Lta1bjuULTubmGzR/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"}},"catto":{"username":"catto","salt":"61530c098bd6fe4b9950fec45598d43f","hash":"124ce29cbd0e5c7bdc926b36867dc3cad879254c865853fd524c4e5e77492245","character":null}}
+{
+    "cattos": {
+        "username": "cattos",
+        "salt": "cadde47b0ed7112f3868f769aa5cdf22",
+        "hash": "16943c4311fb971b364a1a88398ff905c1fbe89f504249c8f035ff4ed32b3f35",
+        "character": {
+            "name": "Cinnabon",
+            "level": "1",
+            "img": "https://media1.giphy.com/media/X5Lta1bjuULTubmGzR/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
+        }
+    },
+    "catto": {
+        "username": "catto",
+        "salt": "61530c098bd6fe4b9950fec45598d43f",
+        "hash": "124ce29cbd0e5c7bdc926b36867dc3cad879254c865853fd524c4e5e77492245",
+        "character": null
+    },
+    "asdasdas": {
+        "username": "asdasdas",
+        "salt": "cbbe82d88f0ddaf11b7e6ce7413b3071",
+        "hash": "661acf403500c8450ad143b6c6c925228844a8934b3f20afe0eb7fc7721ccaf1",
+        "character": {
+            "name": "Hello Kitty",
+            "level": "1",
+            "img": "https://media2.giphy.com/media/Cx0ZDb335IDYxOW7cI/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
+        }
+    }
+}

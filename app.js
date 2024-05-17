@@ -104,6 +104,10 @@ app.get("/getSanrio/:name", async (req, res) => {
   }
 });
 
+/**
+ * Handles account login and creation, saving individual account details in the account-manager
+ * file.
+ */
 app.post("/login", async (req, res) => {
   try {
     let username = req.body.username;
@@ -153,6 +157,9 @@ app.post("/login", async (req, res) => {
   }
 });
 
+/**
+ * Handles setting characters for individual accounts and updating account save files.
+ */
 app.post("/setcharacter", async (req, res) => {
   const prettyPrint = 4;
   const { username, character, level, img } = req.body;
@@ -192,6 +199,10 @@ app.post("/setcharacter", async (req, res) => {
   }
 });
 
+/**
+ * Post request that handles getting specific account save file details containing information about
+ * the character linked to the account such as level, img url, and character names.
+ */
 app.post("/getcharacter", async (req, res) => {
   const {username} = req.body;
 
