@@ -135,7 +135,7 @@ app.post("/login", async (req, res) => {
         await fs.writeFile('account-manager.json', JSON.stringify(users, null, prettyPrint));
         sendResponse(res, good, "account created successfully");
       }
-  } 
+    }
   } catch (err) {
     sendResponse(res, weird, "some server side error");
   }
