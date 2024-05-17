@@ -12,7 +12,7 @@ a game. Data about sanrio characters are from sanrioWiki.com and all image urls 
 
 **Description:** Returns all the data in sanrio.json
 
-**Example Request:** [GET /getSanrio/](http://localhost:8000/getSanrio)
+**Example Request:** /getSanrio
 
 
 **Example Response:**
@@ -39,9 +39,8 @@ a game. Data about sanrio characters are from sanrioWiki.com and all image urls 
 ```
 
 **Error Handling:**
-```
-  "error": "Something went wrong while parsing file"
-```
+Error 500(plain text):
+  'Server side error'
 
 ## /getSanrio/:name
 **Request Format:** /getSanrio/:name
@@ -75,9 +74,11 @@ character
 ```
 
 **Error Handling:**
-```
-  "error": "Something went wrong while parsing file"
-```
+Error 400(plain text):
+  'not a valid Sanrio character'
+
+Error 500(plain text):
+  'Error parsing file'
 
 
 ## /login
@@ -101,32 +102,24 @@ Content-Type: application/json
 **Example Response:**
 *Fill in example response in the {}*
 
-```
-  successfully logged in
-```
-```
-  account created successfully
-```
+res status 200 (plain text):
+  successfully logged in, account created successfully
 
 **Error Handling:**
-```
-  Missing password or username
-```
-```
-  incorrect password or username
-```
-```
-  some server side error
-```
+Error 400(plain text):
+  'Missing username', 'User not found', 'incorrect password or username'
 
-## /character
-**Request Format:** /character
+Error 500(plain text):
+  'Server side error'
+
+## /setcharacter
+**Request Format:** /setcharacter
 
 **Request Type:** POST
 
-**Returned Data Format**: JSON
+**Returned Data Format**: text
 
-**Description:** handles new user character selection. Returns data of the new character.
+**Description:** handles new user character selection
 
 **Example Request:** 
 POST /selectcharacter
@@ -142,6 +135,37 @@ Content-Type: application/json
 **Example Response:**
 *Fill in example response in the {}*
 
+res status 200 (plain text):
+  account created
+
+**Error Handling:**
+Error 400(plain text):
+  'Missing body params', 'User not found'
+
+Error 500(plain text):
+  'Some server side error'
+
+
+## /getcharacter
+**Request Format:** /getcharacter
+
+**Request Type:** POST
+
+**Returned Data Format**: JSON
+
+**Description:** Handles fetching character data for a specified user
+
+**Example Request:** 
+POST /selectcharacter
+Content-Type: application/json
+
+{
+  "username": "user1"
+}
+
+**Example Response:**
+*Fill in example response in the {}*
+
 ```json
 {
   "name": "Keroppi",
@@ -151,12 +175,8 @@ Content-Type: application/json
 ```
 
 **Error Handling:**
-```
-  Missing body params
-```
-```
-  User not found
-```
-```
-  Server side error
-```
+Error 400(plain text):
+  'Missing username', 'User not found'
+
+Error 500(plain text):
+  'Server side error'

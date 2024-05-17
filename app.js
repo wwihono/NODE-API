@@ -74,9 +74,7 @@ app.get("/getSanrio/", async (req, res) => {
 
     res.status(good).json(data);
   } catch (err) {
-    res.status(weird)
-      .type('text')
-      .send("Something went wrong while parsing file");
+    sendResponse(res, weird, "server side error");
   }
 });
 
@@ -94,14 +92,10 @@ app.get("/getSanrio/:name", async (req, res) => {
 
       res.status(good).json(data[character]);
     } else {
-      res.status(bad)
-        .type("text")
-        .send("not a valid Sanrio character");
+      sendResponse(res, bad, "not a valid Sanrio character");
     }
   } catch (err) {
-    res.status(weird)
-      .type('text')
-      .send("Something went wrong while parsing file");
+    sendResponse(res, weird, "Error parsing file")
   }
 });
 
