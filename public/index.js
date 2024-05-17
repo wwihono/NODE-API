@@ -41,6 +41,7 @@
     } catch (err) {
       handleError(err);
     }
+    return false;
   }
 
   async function openSelectionWindow() {

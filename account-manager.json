@@ -1,12 +1,1 @@
-{
-    "wwihono": {
-        "username": "wwihono",
-        "salt": "74605aa7d928a89b98c7969c440bb562",
-        "hash": "2b1731f37f98cc3d44ff69c79c57910feb630feda65078a0cb814d48065d527b",
-        "character": {
-            "name": "Badtz-Maru",
-            "level": "1",
-            "img": "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTd1bXQ3emU5cXlsdjZ5cWZta3Q3c3I3bXlvNGlhN3Y0ZnJpb3lnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FAeq86tKinXthXyfRu/giphy.gif"
-        }
-    }
-}
+{"wwihono":{"username":"wwihono","salt":"e4461c9d62e490f03c836aef2d3389b6","hash":"cd902773678c6dcd000a46c267fa84cca1b37f9979134ce3269e90ff70d8a4b2","character":{"name":"Badtz-Maru","level":"1","img":"https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTd1bXQ3emU5cXlsdjZ5cWZta3Q3c3I3bXlvNGlhN3Y0ZnJpb3lnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FAeq86tKinXthXyfRu/giphy.gif"}},"james":{"username":"james","salt":"1d49b4d4e5500ee3292285883150d841","hash":"878db41c5711b0a7e0a3d4496bc222d418c95148f28dff8caff88557d0739c08"}}
