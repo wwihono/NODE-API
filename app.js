@@ -4,10 +4,8 @@
  * Author: Winston Wihono
  * Section: AF
  * Date: 5/16/2024
- * 
  * This is the main server file for the Sanrio character management application.
  * It handles user authentication, character retrieval, and character updates.
- * 
  * Dependencies:
  * - Express: Web framework for Node.js
  * - Crypto: Node.js module for cryptographic functionality
@@ -24,7 +22,6 @@ const good = 200;
 const bad = 400;
 const weird = 500;
 const userPort = 8000;
-
 
 app.use(multer().none());
 app.use(express.urlencoded({extended: true}));
@@ -77,6 +74,7 @@ app.get("/getSanrio/", async (req, res) => {
 
     res.status(good).json(data);
   } catch (err) {
+
     res.status(weird).type('text').send("Something went wrong while parsing file");
   }
 });
@@ -92,11 +90,14 @@ app.get("/getSanrio/:name", async (req, res) => {
     data = JSON.parse(data);
     let isValid = data[character];
     if (isValid) {
+
       res.status(good).json(data[character]);
     } else {
+
       res.status(bad).type("text").send("not a valid Sanrio character");
     }
   } catch (err) {
+
     res.status(weird).type('text').send("Something went wrong while parsing file");
   }
 });
@@ -107,6 +108,7 @@ app.post("/login", async (req, res) => {
     let password = req.body.password;
 
     if (!username || !password) {
+
       res.status(bad).type('text').send("Missing password or username");
     } else {
       let users = await fs.readFile('account-manager.json', 'utf-8');
@@ -117,8 +119,10 @@ app.post("/login", async (req, res) => {
         let isValid = verifyPassword(password, salt, hash);
         
         if (isValid){
+
           res.status(200).type('text').send("successfully logged in");
         } else {
+
           res.status(400).type('text').send('incorrect password or username');
         }
       } else {
@@ -131,11 +135,12 @@ app.post("/login", async (req, res) => {
         }
 
         await fs.writeFile('account-manager.json', JSON.stringify(users));
+
         res.status(good).type('text').send("account created successfully");
       }
   } 
   } catch (err) {
-    console.log(err);
+
     res.status(weird).type('text').send("some server side error");
   }
 });
@@ -145,6 +150,7 @@ app.post("/setcharacter", async (req, res) => {
   const { username, character, level, img } = req.body;
 
   if (!username || !character || !img || !level) {
+
     return res.status(bad).type('text').send("Missing body params");
   }
 
@@ -153,6 +159,7 @@ app.post("/setcharacter", async (req, res) => {
     accounts = JSON.parse(accounts);
 
     if (!accounts[username]) {
+
       return res.status(bad).type('text').send("User not found");
     }
 
@@ -167,6 +174,7 @@ app.post("/setcharacter", async (req, res) => {
 
     res.status(good).type('text').send("account created");
   } catch (error) {
+
     res.status(weird).type('text').send("Server-side error");
   }
 });
@@ -175,6 +183,7 @@ app.post("/getcharacter", async (req, res) => {
   const {username} = req.body;
 
   if (!username) {
+
     res.status(bad).type('text').send("Missing username");
   }
 
@@ -183,12 +192,15 @@ app.post("/getcharacter", async (req, res) => {
     accounts = JSON.parse(accounts);
 
     if (!accounts[username]) {
+
       res.status(bad).type('text').send("User not found");
     }
 
     const user = accounts[username];
+
     res.status(good).json(user.character);
   } catch (error) {
+
     res.status(weird).type('text').send("Server-side error");
   }
 });
