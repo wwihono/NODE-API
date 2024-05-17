@@ -24,5 +24,15 @@
             "level": "1",
             "img": "https://media2.giphy.com/media/Cx0ZDb335IDYxOW7cI/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
         }
+    },
+    "sadasdas": {
+        "username": "sadasdas",
+        "salt": "45664279f11cab2aca8626d41f4a6581",
+        "hash": "4575bfde4a4dc882d22a2cbe652d9289397c5a41b73a6bd504cdcc688687876a",
+        "character": {
+            "name": "My Melody",
+            "level": "1",
+            "img": "https://media0.giphy.com/media/fFPaFk6iMUPvI1Skox/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
+        }
     }
 }

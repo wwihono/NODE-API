@@ -116,7 +116,7 @@ app.post("/login", async (req, res) => {
     let password = req.body.password;
 
     if (!username || !password) {
-      sendErrorResponse(res, bad, "Missing password or username");
+      sendResponse(res, bad, "Missing password or username");
     } else {
       let users = await fs.readFile('account-manager.json', 'utf-8');
       users = JSON.parse(users);
@@ -125,11 +125,9 @@ app.post("/login", async (req, res) => {
         const {salt, hash} = users[username];
 
         if (verifyPassword(password, salt, hash)){
-          res.status(good)
-            .type('text')
-            .send("successfully logged in");
+          sendResponse(res, good, "successfully logged in");
         } else {
-          sendErrorResponse(res, bad, "incorrect password or username");
+          sendResponse(res, bad, "incorrect password or username");
         }
       } else {
         const {salt, hash} = hashPasswords(password);
@@ -137,23 +135,21 @@ app.post("/login", async (req, res) => {
 
         await fs.writeFile('account-manager.json', JSON.stringify(users, null, prettyPrint));
 
-        res.status(good)
-          .type('text')
-          .send("account created successfully");
+        sendResponse(res, good, "account created successfully");
       }
   } 
   } catch (err) {
-    sendErrorResponse(res, weird, "some server side error");
+    sendResponse(res, weird, "some server side error");
   }
 });
 
 /**
- * Sends an error response with the specified status code and message.
+ * Sends a response with the specified status code and message.
  * @param {Object} res - The Express response object.
  * @param {number} statusCode - The HTTP status code.
- * @param {string} message - The error message.
+ * @param {string} message - message sent.
  */
-function sendErrorResponse(res, statusCode, message) {
+function sendResponse(res, statusCode, message) {
   res.status(statusCode).type('text').send(message);
 }
 
