@@ -1,10 +1,14 @@
 "use strict";
 (function() {
-  
   let currentUser = null;
   let currName, currLevel, currImg;
   window.addEventListener('load', init);
 
+  /**
+   * Initializes interactive aspects of the Sanrio Characters Encyclopedia website. Gives function
+   * to the buttons and prepares the form to take in login values. Additionally handles the game
+   * screen visibility and character selection display.
+   */
   function init() {
     qs(".content").addEventListener("mouseover", revealInfo);
     qs(".content").addEventListener("mouseout", hideInfo);
@@ -13,7 +17,7 @@
 
       const loginSuccess = await login();
       if (loginSuccess) {
-        if(!(await checkExistingCharacter())) {
+        if (!(await checkExistingCharacter())) {
           await openSelectionWindow();
         } else {
           displayGameScreen();
@@ -22,31 +26,36 @@
     });
   }
 
+  /**
+   * Checks the current users account data for an existing character and handles errors while
+   * getting the data
+   * @returns {boolean} - returns true if there is already existing savedata for the account, else
+   *                      returns false
+   */
   async function checkExistingCharacter() {
     let form = new FormData();
     form.append("username", currentUser);
-    
+
     try {
       let saveFile = await fetch("/getcharacter", {method: 'POST', body: form});
       await statusCheck(saveFile);
       let data = await saveFile.json();
-      console.log(data);
-      if (data != null) {
+      if (!(data === null)) {
         currName = data.name;
         currLevel = data.level;
         currImg = data.img;
         return true;
-      } else {
-        return false;
       }
+      return false;
     } catch (err) {
       handleError(err);
-      return false;
     }
   }
 
+  /**
+   * Handles opening  and displaying the character selection window when a new player signs in
+   */
   async function openSelectionWindow() {
-    const container = id("sanrio-container");
     qs("form").classList.add("hidden");
     qs("#home-btn").textContent = "logout";
     
@@ -57,6 +66,9 @@
       .catch(err => handleError(err));
   }
 
+  /**
+   * Handles displaying the game screen for all players with an existing character savedata.
+   */
   function displayGameScreen() {
     const sanrioContainer = qs("#sanrio-container");
     const characterContainer = qs("#character-container");
@@ -230,4 +242,4 @@
   function gen(tagName) {
     return document.createElement(tagName);
   }
-}());
+})();

@@ -95,7 +95,7 @@ app.get("/getSanrio/:name", async (req, res) => {
       sendResponse(res, bad, "not a valid Sanrio character");
     }
   } catch (err) {
-    sendResponse(res, weird, "Error parsing file")
+    sendResponse(res, weird, "Error parsing file");
   }
 });
 
