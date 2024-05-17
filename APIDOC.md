@@ -53,7 +53,7 @@ a game. Data about sanrio characters are from sanrioWiki.com and all image urls 
 **Description:** Takes in a name parameter in the url and returns the data of the specified 
 character
 
-**Example Request:** [GET /getSanrio/kerropi](http://localhost:8000/getSanrio/keroppi)
+**Example Request:** GET /getSanrio/kerropi
 
 **Example Response:**
 
@@ -90,7 +90,7 @@ character
 **Description:** handles user login and account creation. If account does not exist, create new.
 
 **Example Request:** 
-POST http://localhost:8000/login HTTP/1.1
+POST /login
 Content-Type: application/json
 
 {
@@ -129,7 +129,7 @@ Content-Type: application/json
 **Description:** handles new user character selection. Returns data of the new character.
 
 **Example Request:** 
-POST http://localhost:8000/selectcharacter HTTP/1.1
+POST /selectcharacter
 Content-Type: application/json
 
 {
