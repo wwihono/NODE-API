@@ -1,27 +1,12 @@
 {
     "wwihono": {
         "username": "wwihono",
-        "salt": "c01823e7d369faa31415ef4ad0cd450e",
-        "hash": "4af59145aaa0fc6406d6c5fc1fd431e6e9e12bda51eb239688c609dfcf1d0bf7"
-    },
-    "james": {
-        "username": "james",
-        "salt": "60498916881b803f275f4eb467c22cfd",
-        "hash": "21e3c97309cf234e0a94956ff21b105b5613708791d981cb3870f6831d673398"
-    },
-    "Winstw2@uw.edu": {
-        "username": "Winstw2@uw.edu",
-        "salt": "51bd29b9e6edb5caa1ebc050d658773b",
-        "hash": "6b65b9856ee344885fc85471647bc6770511eb94ac3f8e043f23d0884c67c3fe"
-    },
-    "someone": {
-        "username": "someone",
-        "salt": "483abb359dbeb722a3ac5cd073d54c94",
-        "hash": "cfeed395864d9abdfbbfed60640418a13f150551f68201e12ce231c898df3d45",
+        "salt": "74605aa7d928a89b98c7969c440bb562",
+        "hash": "2b1731f37f98cc3d44ff69c79c57910feb630feda65078a0cb814d48065d527b",
         "character": {
-            "name": "Cinnamoroll",
+            "name": "Badtz-Maru",
             "level": "1",
-            "img": "https://media1.giphy.com/media/X5Lta1bjuULTubmGzR/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
+            "img": "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTd1bXQ3emU5cXlsdjZ5cWZta3Q3c3I3bXlvNGlhN3Y0ZnJpb3lnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FAeq86tKinXthXyfRu/giphy.gif"
         }
     }
 }

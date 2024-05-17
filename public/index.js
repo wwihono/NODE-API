@@ -2,6 +2,7 @@
 (function() {
   
   let currentUser = null;
+  let currName, currLevel, currImg;
   window.addEventListener('load', init);
 
   function init() {
@@ -11,13 +12,34 @@
       event.preventDefault();
       
       await login();
-      //if(checkExistingCharacter()) {
-      // 
-      //};
-      if (currentUser != null) {
-        openSelectionWindow();
+    
+      if(!(await checkExistingCharacter())) {
+        await openSelectionWindow();
+      } else{
+        displayGameScreen();
       }
     });
+  }
+
+  async function checkExistingCharacter() {
+    let form = new FormData();
+    form.append("username", currentUser);
+    
+    try {
+      let saveFile = await fetch("/getcharacter", {method: 'POST', body: form});
+      await statusCheck(saveFile);
+      let data = await saveFile.json();
+      if (data.character != null) {
+        currName = data.character.name;
+        currLevel = data.character.level;
+        currImg = data.character.img;
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      handleError(err);
+    }
   }
 
   async function openSelectionWindow() {
@@ -29,6 +51,41 @@
       .then(data => data.json())
       .then(populateWindow)
       .catch(err => handleError(err));
+  }
+
+  function displayGameScreen() {
+    const sanrioContainer = qs("#sanrio-container");
+    const characterContainer = qs("#character-container");
+
+
+    // hide form
+    qs("form").classList.add("hidden");
+
+    // Change text to Logout
+    qs("#home-btn").textContent = "Logout";
+    qs("#home-btn").addEventListener('click', () => {
+      qs("#home-btn").textContent = "Login";
+    });
+  
+    // Add 'hidden' class to all elements within #sanrio-container
+    sanrioContainer.querySelectorAll("*").forEach(element => {
+      element.classList.add("hidden");
+    });
+  
+    // Remove 'hidden' class from #character-container
+    characterContainer.classList.remove("hidden");
+
+    // Create character screen modules
+    let img = gen("img");
+    let desc = gen("p")
+    img.src = currImg;
+    img.alt = currName;
+    img.classList.add("sanrio");
+    desc.classList.add('description');
+    desc.innerHTML = `Name: ${currName} <br>
+    Level: ${currLevel}`;
+    characterContainer.appendChild(img);
+    characterContainer.appendChild(desc);
   }
 
   function populateWindow(res) {
@@ -58,10 +115,10 @@
     form.append("img", this.src);
 
     try {
-      let file = await fetch("/character", {method: "POST", body: form}); // updates character data
+      let file = await fetch("/setcharacter", {method: "POST", body: form});
       await statusCheck(file);
+      displayGameScreen();
     } catch (error) {
-      console.log(error);
       handleError(error);
     }
   }
@@ -93,7 +150,6 @@
 
   function handleError(error) {
     console.error('Error:', error);
-    alert('An error occurred. Please try again.');
   }
 
   function hideInfo() {

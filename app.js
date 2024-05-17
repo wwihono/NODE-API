@@ -4,7 +4,7 @@ const app = express();
 const crypto = require('crypto');
 const multer = require('multer');
 const fs = require('fs').promises;
-const path = require('path');
+
 app.use(multer().none());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -64,38 +64,38 @@ app.post("/login", async (req, res) => {
 
     if (!username || !password) {
       res.status(400).type('text').send("Missing password or username");
-    }
-    
-    let users = await fs.readFile('account-manager.json', 'utf-8');
-    users = JSON.parse(users);
+    } else{
+      let users = await fs.readFile('account-manager.json', 'utf-8');
+      users = JSON.parse(users);
 
-    if (users[username]) {
-      const { salt, hash } = users[username];
-      let isValid = verifyPassword(password, salt, hash);
-      
-      if (isValid){
-        res.status(200).type('text').send("successfully logged in");
+      if (users[username]) {
+        const { salt, hash } = users[username];
+        let isValid = verifyPassword(password, salt, hash);
+        
+        if (isValid){
+          res.status(200).type('text').send("successfully logged in");
+        } else {
+          res.status(400).type('text').send('incorrect password or username');
+        } 
       } else {
-        res.status(400).type('text').send('incorrect password or username');
-      } 
-    } else {
-      const { salt, hash } = hashPasswords(password);
-      users[username] = {
-        "username": username,
-        "salt": salt,
-        "hash": hash
-      }
+        const { salt, hash } = hashPasswords(password);
+        users[username] = {
+          "username": username,
+          "salt": salt,
+          "hash": hash
+        }
 
-      await fs.writeFile('account-manager.json', JSON.stringify(users));
-      res.status(200).type('text').send("account created successfully");
-    }
+        await fs.writeFile('account-manager.json', JSON.stringify(users));
+        res.status(200).type('text').send("account created successfully");
+      }
+  } 
   } catch (err) {
     console.log(err);
     res.status(500).type('text').send("some server side error");
   }
 });
 
-app.post("/character", async (req, res) => {
+app.post("/setcharacter", async (req, res) => {
   const { username, character, level, img } = req.body;
 
   if (!username || !character || !img || !level) {
@@ -111,7 +111,6 @@ app.post("/character", async (req, res) => {
     }
 
     const user = accounts[username];
-    const characterExists = user.character;
 
     user.character = {
       name: character,
@@ -121,12 +120,36 @@ app.post("/character", async (req, res) => {
 
     await fs.writeFile('account-manager.json', JSON.stringify(accounts, null, 4));
 
-    if (characterExists) {
-      res.status(200).json(user.character);
+    res.status(200).type('text').send("account created");
+  } catch (error) {
+    res.status(500).type('text').send("Server-side error");
+  }
+});
+
+app.post("/getcharacter", async (req, res) => {
+  const { username } = req.body;
+
+  if (!username) {
+    return res.status(400).type('text').send("Missing username");
+  }
+
+  try {
+    let accounts = await fs.readFile('account-manager.json', "utf-8");
+    accounts = JSON.parse(accounts);
+
+    if (!accounts[username]) {
+      return res.status(400).type('text').send("User not found");
+    }
+
+    const user = accounts[username];
+
+    if (user.character) {
+      res.status(200).json({ character: user.character });
     } else {
-      res.status(201).json(user.character);
+      res.status(200).json({ character: null });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).type('text').send("Server-side error");
   }
 });

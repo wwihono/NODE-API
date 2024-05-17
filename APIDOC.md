@@ -126,11 +126,10 @@ Content-Type: application/json
 
 **Returned Data Format**: JSON
 
-**Description:** handles user character selection and creation. Loads existing character or sets
-a character for new accounts
+**Description:** handles new user character selection. Returns data of the new character.
 
 **Example Request:** 
-POST http://localhost:8000/character HTTP/1.1
+POST http://localhost:8000/selectcharacter HTTP/1.1
 Content-Type: application/json
 
 {
