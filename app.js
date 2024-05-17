@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Author: Winston Wihono
  * Section: AF
@@ -13,6 +11,7 @@
  * - FS: File system module (promises-based) for reading and writing JSON files
  */
 
+"use strict";
 const express = require('express');
 const app = express();
 const crypto = require('crypto');
