@@ -1,22 +1,44 @@
 "use strict";
+
+/**
+ * Author: Winston Wihono
+ * Section: AF
+ * Date: 5/16/2024
+ * 
+ * This is the main server file for the Sanrio character management application.
+ * It handles user authentication, character retrieval, and character updates.
+ * 
+ * Dependencies:
+ * - Express: Web framework for Node.js
+ * - Crypto: Node.js module for cryptographic functionality
+ * - Multer: Middleware for handling multipart/form-data (used for file uploads)
+ * - FS: File system module (promises-based) for reading and writing JSON files
+ */
+
 const express = require('express');
 const app = express();
 const crypto = require('crypto');
 const multer = require('multer');
 const fs = require('fs').promises;
+const good = 200;
+const bad = 400;
+const weird = 500;
+const userPort = 8000;
+
 
 app.use(multer().none());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 /**
- * Encrypt passwords and returns encryption key
- * @param {String} password - Password to be hashed
- * @returns { salt, hash } - Encrypted password keys
+ * Encrypts a password and returns the salt and hash.
+ * @param {string} password - The password to be hashed.
+ * @returns {{salt: string, hash: string}} - An object containing the salt and hashed password.
  */
 function hashPasswords(password) {
 
-  let randomSalt = 16
+  const randomSalt = 16;
+
   // Generate a random salt
   const salt = crypto.randomBytes(randomSalt).toString('hex');
 
@@ -28,7 +50,14 @@ function hashPasswords(password) {
   return {salt, hash};
 }
 
-// Function to verify the password
+/**
+ * Verifies the input password by hashing it with the provided salt and comparing it to the original
+ * hash.
+ * @param {string} inputPassword - The password provided by the user.
+ * @param {string} salt - The salt used when hashing the original password.
+ * @param {string} originalHash - The original hashed password.
+ * @returns {boolean} - True if the hashed password matches the original hash, false otherwise.
+ */
 function verifyPassword(inputPassword, salt, originalHash) {
   const hash = crypto.createHmac('sha256', salt)
     .update(inputPassword)
@@ -36,18 +65,26 @@ function verifyPassword(inputPassword, salt, originalHash) {
   return hash === originalHash;
 }
 
+/**
+ * Handles GET requests to retrieve all Sanrio characters from the sanrio.json file.
+ * Responds with a JSON object containing all Sanrio characters.
+ */
 app.get("/getSanrio/", async (req, res) => {
   try {
     let data = await fs.readFile('sanrio.json', 'utf-8');
 
     data = JSON.parse(data);
 
-    res.status(200).json(data);
+    res.status(good).json(data);
   } catch (err) {
-    res.status(500).type('text').send("Something went wrong while parsing file");
+    res.status(weird).type('text').send("Something went wrong while parsing file");
   }
 });
 
+/**
+ * Handles GET requests to retrieve specific Sanrio characters from the sanrio.json file.
+ * Responds with a JSON object containing specific Sanrio characters.
+ */
 app.get("/getSanrio/:name", async (req, res) => {
   try {
     let character = req.params['name'];
@@ -55,12 +92,12 @@ app.get("/getSanrio/:name", async (req, res) => {
     data = JSON.parse(data);
     let isValid = data[character];
     if (isValid) {
-      res.status(200).json(data[character]);
+      res.status(good).json(data[character]);
     } else {
-      res.status(400).type("text").send("not a valid Sanrio character");
+      res.status(bad).type("text").send("not a valid Sanrio character");
     }
   } catch (err) {
-    res.status(500).type('text').send("Something went wrong while parsing file");
+    res.status(weird).type('text').send("Something went wrong while parsing file");
   }
 });
 
@@ -70,7 +107,7 @@ app.post("/login", async (req, res) => {
     let password = req.body.password;
 
     if (!username || !password) {
-      res.status(400).type('text').send("Missing password or username");
+      res.status(bad).type('text').send("Missing password or username");
     } else {
       let users = await fs.readFile('account-manager.json', 'utf-8');
       users = JSON.parse(users);
@@ -94,20 +131,21 @@ app.post("/login", async (req, res) => {
         }
 
         await fs.writeFile('account-manager.json', JSON.stringify(users));
-        res.status(200).type('text').send("account created successfully");
+        res.status(good).type('text').send("account created successfully");
       }
   } 
   } catch (err) {
     console.log(err);
-    res.status(500).type('text').send("some server side error");
+    res.status(weird).type('text').send("some server side error");
   }
 });
 
 app.post("/setcharacter", async (req, res) => {
+  const prettyPrint = 4;
   const { username, character, level, img } = req.body;
 
   if (!username || !character || !img || !level) {
-    return res.status(400).type('text').send("Missing body params");
+    return res.status(bad).type('text').send("Missing body params");
   }
 
   try {
@@ -115,7 +153,7 @@ app.post("/setcharacter", async (req, res) => {
     accounts = JSON.parse(accounts);
 
     if (!accounts[username]) {
-      return res.status(400).type('text').send("User not found");
+      return res.status(bad).type('text').send("User not found");
     }
 
     const user = accounts[username];
@@ -125,11 +163,11 @@ app.post("/setcharacter", async (req, res) => {
       img: img
     };
 
-    await fs.writeFile('account-manager.json', JSON.stringify(accounts, null, 4));
+    await fs.writeFile('account-manager.json', JSON.stringify(accounts, null, prettyPrint));
 
-    res.status(200).type('text').send("account created");
+    res.status(good).type('text').send("account created");
   } catch (error) {
-    res.status(500).type('text').send("Server-side error");
+    res.status(weird).type('text').send("Server-side error");
   }
 });
 
@@ -137,7 +175,7 @@ app.post("/getcharacter", async (req, res) => {
   const {username} = req.body;
 
   if (!username) {
-    res.status(400).type('text').send("Missing username");
+    res.status(bad).type('text').send("Missing username");
   }
 
   try {
@@ -145,16 +183,16 @@ app.post("/getcharacter", async (req, res) => {
     accounts = JSON.parse(accounts);
 
     if (!accounts[username]) {
-      res.status(400).type('text').send("User not found");
+      res.status(bad).type('text').send("User not found");
     }
 
     const user = accounts[username];
-    res.status(200).json(user.character);
+    res.status(good).json(user.character);
   } catch (error) {
-    res.status(500).type('text').send("Server-side error");
+    res.status(weird).type('text').send("Server-side error");
   }
 });
 
 app.use(express.static('public'));
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || userPort;
 app.listen(PORT);
