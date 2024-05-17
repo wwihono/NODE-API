@@ -18,7 +18,7 @@
       const loginSuccess = await login();
       if (loginSuccess) {
         if (!(await checkExistingCharacter())) {
-          await openSelectionWindow();
+          openSelectionWindow();
         } else {
           displayGameScreen();
         }
@@ -55,10 +55,10 @@
   /**
    * Handles opening  and displaying the character selection window when a new player signs in
    */
-  async function openSelectionWindow() {
+  function openSelectionWindow() {
     qs("form").classList.add("hidden");
     qs("#home-btn").textContent = "logout";
-    
+
     fetch("/getSanrio")
       .then(statusCheck)
       .then(data => data.json())
@@ -81,18 +81,18 @@
     qs("#home-btn").addEventListener('click', () => {
       qs("#home-btn").textContent = "Login";
     });
-  
+
     // Add 'hidden' class to all elements within #sanrio-container
     sanrioContainer.querySelectorAll("*").forEach(element => {
       element.classList.add("hidden");
     });
-  
+
     // Remove 'hidden' class from #character-container
     characterContainer.classList.remove("hidden");
 
     // Create character screen modules
     let img = gen("img");
-    let desc = gen("p")
+    let desc = gen("p");
     img.src = currImg;
     img.alt = currName;
     img.classList.add("sanrio");
@@ -103,8 +103,12 @@
     characterContainer.appendChild(desc);
   }
 
+  /**
+   * Populates the selection window page with selectable character images
+   * @param {Object} res - json object containing img and character data 
+   */
   function populateWindow(res) {
-    id("sanrio-container").innerHtml ='';
+    id("sanrio-container").innerHtml = '';
     Object.keys(res).forEach(character => {
       let container = gen("div");
       let img = gen("img");
@@ -122,6 +126,9 @@
     })
   }
 
+  /**
+   * Handles selecting a new character for a specific account and displays the game page.
+   */
   async function selectCharacter() {
     let form = new FormData();
     form.append("username", currentUser);
@@ -141,7 +148,11 @@
     }
   }
 
-  async function login(event) {
+  /**
+   * Handles existing user login and new account creation
+   * @returns {boolean} - if a login is successful, return true, otherwise return false
+   */
+  async function login() {
     const data = {
       username: id("username").value,
       password: id("pwd").value
@@ -157,7 +168,7 @@
       });
       let res = await statusCheck(response);
 
-      if (res.status == 200) {
+      if (res.status === good) {
         currentUser = data.username;
         return true;
       } else {
@@ -169,6 +180,7 @@
     }
     return false;
   }
+
 
   function handleError(error) {
     console.error('Error:', error);

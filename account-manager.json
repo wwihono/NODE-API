@@ -54,5 +54,35 @@
             "level": "1",
             "img": "https://media0.giphy.com/media/fFPaFk6iMUPvI1Skox/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
         }
+    },
+    "asdasd": {
+        "username": "asdasd",
+        "salt": "3c6ba1ad878203fdaa9cfc85f10fffd3",
+        "hash": "47c9a2a9fa38ab31056a490dfe4e84da1e7745435d103991e58f9570554598c0",
+        "character": {
+            "name": "Badtz-Maru",
+            "level": "1",
+            "img": "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTd1bXQ3emU5cXlsdjZ5cWZta3Q3c3I3bXlvNGlhN3Y0ZnJpb3lnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FAeq86tKinXthXyfRu/giphy.gif"
+        }
+    },
+    "adsasdas": {
+        "username": "adsasdas",
+        "salt": "8b5ccaee0ce64fea17d1c08896b6a954",
+        "hash": "b28ed788ac6c095d4006deff96215c16499e8aedb9dd9185a6d6716dce0534dc",
+        "character": {
+            "name": "Badtz-Maru",
+            "level": "1",
+            "img": "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTd1bXQ3emU5cXlsdjZ5cWZta3Q3c3I3bXlvNGlhN3Y0ZnJpb3lnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FAeq86tKinXthXyfRu/giphy.gif"
+        }
+    },
+    "adsd": {
+        "username": "adsd",
+        "salt": "8a227ffb527d529f7044d3ef31f2e1e7",
+        "hash": "2252ce1eeec458e277ade236256906d34016e9262562ea5a3d74e780a96aea75",
+        "character": {
+            "name": "Hello Kitty",
+            "level": "1",
+            "img": "https://media2.giphy.com/media/Cx0ZDb335IDYxOW7cI/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
+        }
     }
 }
