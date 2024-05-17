@@ -74,8 +74,9 @@ app.get("/getSanrio/", async (req, res) => {
 
     res.status(good).json(data);
   } catch (err) {
-
-    res.status(weird).type('text').send("Something went wrong while parsing file");
+    res.status(weird)
+      .type('text')
+      .send("Something went wrong while parsing file");
   }
 });
 
@@ -109,41 +110,32 @@ app.get("/getSanrio/:name", async (req, res) => {
  * file.
  */
 app.post("/login", async (req, res) => {
+  const prettyPrint = 4;
   try {
     let username = req.body.username;
     let password = req.body.password;
 
     if (!username || !password) {
-      res.status(bad)
-        .type('text')
-        .send("Missing password or username");
+      sendErrorResponse(res, bad, "Missing password or username");
     } else {
       let users = await fs.readFile('account-manager.json', 'utf-8');
       users = JSON.parse(users);
 
       if (users[username]) {
         const {salt, hash} = users[username];
-        let isValid = verifyPassword(password, salt, hash);
-        
-        if (isValid){
-          res.status(200)
+
+        if (verifyPassword(password, salt, hash)){
+          res.status(good)
             .type('text')
             .send("successfully logged in");
         } else {
-          res.status(bad)
-            .type('text')
-            .send('incorrect password or username');
+          sendErrorResponse(res, bad, "incorrect password or username");
         }
       } else {
         const {salt, hash} = hashPasswords(password);
-        users[username] = {
-          "username": username,
-          "salt": salt,
-          "hash": hash,
-          "character": null
-        }
+        users[username] = {"username": username, "salt": salt, "hash": hash, "character": null}
 
-        await fs.writeFile('account-manager.json', JSON.stringify(users));
+        await fs.writeFile('account-manager.json', JSON.stringify(users, null, prettyPrint));
 
         res.status(good)
           .type('text')
@@ -151,11 +143,19 @@ app.post("/login", async (req, res) => {
       }
   } 
   } catch (err) {
-    res.status(weird)
-      .type('text')
-      .send("some server side error");
+    sendErrorResponse(res, weird, "some server side error");
   }
 });
+
+/**
+ * Sends an error response with the specified status code and message.
+ * @param {Object} res - The Express response object.
+ * @param {number} statusCode - The HTTP status code.
+ * @param {string} message - The error message.
+ */
+function sendErrorResponse(res, statusCode, message) {
+  res.status(statusCode).type('text').send(message);
+}
 
 /**
  * Handles setting characters for individual accounts and updating account save files.
