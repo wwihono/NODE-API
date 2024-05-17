@@ -2,7 +2,7 @@
  * Author: Winston Wihono
  * Section: AF
  * Date: 5/16/2024
- * This is the main script file for the Sanrio Characters Encyclopedia website. It handles 
+ * This is the main script file for the Sanrio Characters Encyclopedia website. It handles
  * site reactivity and all visual errors and site events. This includes,
  * handling user login and character selection, and managing the display of the
  * game screen. The script ensures smooth interaction and user experience by dynamically
