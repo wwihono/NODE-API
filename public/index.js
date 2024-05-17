@@ -238,15 +238,6 @@
   }
 
   /**
-   * Gets the first instance of the element selected
-   * @param {string} selector - HTML query selector
-   * @returns {Element} - element associated with the selector
-   */
-  function qsa(selector) {
-    return document.querySelectorAll(selector);
-  }
-
-  /**
    * Tag generator for new DOM nodes
    * @param {string} tagName - element tag type
    * @returns {Element} - a new DOM element with the specified tag
