@@ -171,9 +171,7 @@ app.post("/setcharacter", async (req, res) => {
     accounts = JSON.parse(accounts);
 
     if (!accounts[username]) {
-      res.status(bad)
-        .type('text')
-        .send("User not found");
+      sendResponse(res, bad, "User not found");
     }
 
     const user = accounts[username];
@@ -185,13 +183,9 @@ app.post("/setcharacter", async (req, res) => {
 
     await fs.writeFile('account-manager.json', JSON.stringify(accounts, null, prettyPrint));
 
-    res.status(good)
-      .type('text')
-      .send("account created");
+    sendResponse(res, good, "account created");
   } catch (error) {
-    res.status(weird)
-      .type('text')
-      .send("Server-side error");
+    sendResponse(res, weird, "Some server side error");
   }
 });
 
@@ -203,9 +197,7 @@ app.post("/getcharacter", async (req, res) => {
   const {username} = req.body;
 
   if (!username) {
-    res.status(bad)
-      .type('text')
-      .send("Missing username");
+    sendResponse(res, bad, "missing username");
   }
 
   try {
@@ -213,9 +205,7 @@ app.post("/getcharacter", async (req, res) => {
     accounts = JSON.parse(accounts);
 
     if (!accounts[username]) {
-      res.status(bad)
-        .type('text')
-        .send("User not found");
+      sendResponse(res, bad, "User not found");
     }
 
     const user = accounts[username];
@@ -223,9 +213,7 @@ app.post("/getcharacter", async (req, res) => {
     res.status(good).json(user.character);
   } catch (error) {
 
-    res.status(weird)
-      .type('text')
-      .send("Server-side error");
+    sendResponse(res, weird, "server side error");
   }
 });
 
