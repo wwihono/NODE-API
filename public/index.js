@@ -105,7 +105,7 @@
 
   /**
    * Populates the selection window page with selectable character images
-   * @param {Object} res - json object containing img and character data 
+   * @param {Object} res - json object containing img and character data
    */
   function populateWindow(res) {
     id("sanrio-container").innerHtml = '';
@@ -123,7 +123,7 @@
       container.appendChild(img);
       container.appendChild(parag);
       id("sanrio-container").appendChild(container);
-    })
+    });
   }
 
   /**
@@ -153,10 +153,11 @@
    * @returns {boolean} - if a login is successful, return true, otherwise return false
    */
   async function login() {
+    const good = 200;
     const data = {
       username: id("username").value,
       password: id("pwd").value
-    }
+    };
 
     try {
       const response = await fetch('/login', {
@@ -171,9 +172,8 @@
       if (res.status === good) {
         currentUser = data.username;
         return true;
-      } else {
-        qs("form").reset();
       }
+      qs("form").reset();
     } catch (error) {
       handleError(error);
       qs("form").reset();
@@ -181,11 +181,17 @@
     return false;
   }
 
-
+  /**
+   * Handles logging error details and location
+   * @param {Error} error - error object containing error details
+   */
   function handleError(error) {
     console.error('Error:', error);
   }
 
+  /**
+   * Handles hiding the information on the info sidebar
+   */
   function hideInfo() {
     const span = qs(".content span");
     span.classList.remove("info");
@@ -193,6 +199,9 @@
     span.textContent = "help";
   }
 
+  /**
+   * Handles revealing the info on the sidebar
+   */
   function revealInfo() {
     const span = qs(".content span");
     span.classList.remove("material-symbols-outlined");
