@@ -1,7 +1,7 @@
 # Sanrio Pets API Documentation
 This API allows clients to get public data about all the main sanrio characters. The
 API also contains password and login handling for websites that want to utilize the information into
-a game.
+a game. Data about sanrio characters are from sanrioWiki.com and all image urls are from giphy.
 
 ## /getSanrio
 **Request Format:** /getSanrio

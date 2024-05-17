@@ -9,16 +9,23 @@ app.use(multer().none());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+/**
+ * Encrypt passwords and returns encryption key
+ * @param {String} password - Password to be hashed
+ * @returns { salt, hash } - Encrypted password keys
+ */
 function hashPasswords(password) {
+
+  let randomSalt = 16
   // Generate a random salt
-  const salt = crypto.randomBytes(16).toString('hex');
-    
+  const salt = crypto.randomBytes(randomSalt).toString('hex');
+
   // Hash the password with the salt
   const hash = crypto.createHmac('sha256', salt)
     .update(password)
     .digest('hex');
-  
-  return { salt, hash };
+
+  return {salt, hash};
 }
 
 // Function to verify the password
@@ -64,12 +71,12 @@ app.post("/login", async (req, res) => {
 
     if (!username || !password) {
       res.status(400).type('text').send("Missing password or username");
-    } else{
+    } else {
       let users = await fs.readFile('account-manager.json', 'utf-8');
       users = JSON.parse(users);
 
       if (users[username]) {
-        const { salt, hash } = users[username];
+        const {salt, hash} = users[username];
         let isValid = verifyPassword(password, salt, hash);
         
         if (isValid){
@@ -78,7 +85,7 @@ app.post("/login", async (req, res) => {
           res.status(400).type('text').send('incorrect password or username');
         } 
       } else {
-        const { salt, hash } = hashPasswords(password);
+        const {salt, hash} = hashPasswords(password);
         users[username] = {
           "username": username,
           "salt": salt,
@@ -111,7 +118,6 @@ app.post("/setcharacter", async (req, res) => {
     }
 
     const user = accounts[username];
-
     user.character = {
       name: character,
       level: level,
@@ -127,7 +133,7 @@ app.post("/setcharacter", async (req, res) => {
 });
 
 app.post("/getcharacter", async (req, res) => {
-  const { username } = req.body;
+  const username = req.body;
 
   if (!username) {
     return res.status(400).type('text').send("Missing username");
@@ -144,9 +150,9 @@ app.post("/getcharacter", async (req, res) => {
     const user = accounts[username];
 
     if (user.character) {
-      res.status(200).json({ character: user.character });
+      res.status(200).json({character: user.character});
     } else {
-      res.status(200).json({ character: null });
+      res.status(200).json({character: null});
     }
   } catch (error) {
     console.log(error);
