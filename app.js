@@ -83,7 +83,7 @@ app.post("/login", async (req, res) => {
           res.status(200).type('text').send("successfully logged in");
         } else {
           res.status(400).type('text').send('incorrect password or username');
-        } 
+        }
       } else {
         const {salt, hash} = hashPasswords(password);
         users[username] = {
@@ -136,7 +136,7 @@ app.post("/getcharacter", async (req, res) => {
   const username = req.body;
 
   if (!username) {
-    return res.status(400).type('text').send("Missing username");
+    res.status(400).type('text').send("Missing username");
   }
 
   try {
@@ -144,7 +144,7 @@ app.post("/getcharacter", async (req, res) => {
     accounts = JSON.parse(accounts);
 
     if (!accounts[username]) {
-      return res.status(400).type('text').send("User not found");
+      res.status(400).type('text').send("User not found");
     }
 
     const user = accounts[username];

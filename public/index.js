@@ -10,13 +10,14 @@
     qs(".content").addEventListener("mouseout", hideInfo);
     qs("form").addEventListener("submit", async (event) => {
       event.preventDefault();
-      
-      await login();
-    
-      if(!(await checkExistingCharacter())) {
-        await openSelectionWindow();
-      } else{
-        displayGameScreen();
+
+      const loginSuccess = await login();
+      if (loginSuccess) {
+        if(!(await checkExistingCharacter())) {
+          await openSelectionWindow();
+        } else {
+          displayGameScreen();
+        }
       }
     });
   }
@@ -56,7 +57,6 @@
   function displayGameScreen() {
     const sanrioContainer = qs("#sanrio-container");
     const characterContainer = qs("#character-container");
-
 
     // hide form
     qs("form").classList.add("hidden");
@@ -141,11 +141,15 @@
 
       if (res.status == 200) {
         currentUser = data.username;
+        return true;
+      } else {
+        qs("form").reset();
       }
     } catch (error) {
       handleError(error);
-      qs("form").reset;
+      qs("form").reset();
     }
+    return false;
   }
 
   function handleError(error) {
