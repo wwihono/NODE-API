@@ -34,5 +34,25 @@
             "level": "1",
             "img": "https://media0.giphy.com/media/fFPaFk6iMUPvI1Skox/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
         }
+    },
+    "esfdsfa": {
+        "username": "esfdsfa",
+        "salt": "6c29d74d4e219d03f2ca326d1ff4d7c5",
+        "hash": "fba7d6f6f306859b1152d6d05ead872b3d0c783bb1ab08dc40374f63b4b08086",
+        "character": {
+            "name": "Badtz-Maru",
+            "level": "1",
+            "img": "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTd1bXQ3emU5cXlsdjZ5cWZta3Q3c3I3bXlvNGlhN3Y0ZnJpb3lnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FAeq86tKinXthXyfRu/giphy.gif"
+        }
+    },
+    "sdasdfsdfsdfas": {
+        "username": "sdasdfsdfsdfas",
+        "salt": "14c0c49a604f666fe6af03c6ad4c4576",
+        "hash": "43c2542a3c7bc7114ac3a3fd45f34034d8d9fd7f3c053475003d52178a109891",
+        "character": {
+            "name": "My Melody",
+            "level": "1",
+            "img": "https://media0.giphy.com/media/fFPaFk6iMUPvI1Skox/200w.webp?cid=ecf05e47oynni9w862jx1418mc0z1oy98yxmnk2i4905mpic&ep=v1_gifs_related&rid=200w.webp&ct=g"
+        }
     }
 }

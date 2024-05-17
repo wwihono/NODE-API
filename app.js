@@ -124,17 +124,15 @@ app.post("/login", async (req, res) => {
       if (users[username]) {
         const {salt, hash} = users[username];
 
-        if (verifyPassword(password, salt, hash)){
+        if (verifyPassword(password, salt, hash)) {
           sendResponse(res, good, "successfully logged in");
         } else {
           sendResponse(res, bad, "incorrect password or username");
         }
       } else {
         const {salt, hash} = hashPasswords(password);
-        users[username] = {"username": username, "salt": salt, "hash": hash, "character": null}
-
+        users[username] = {"username": username, "salt": salt, "hash": hash, "character": null};
         await fs.writeFile('account-manager.json', JSON.stringify(users, null, prettyPrint));
-
         sendResponse(res, good, "account created successfully");
       }
   } 
@@ -150,7 +148,9 @@ app.post("/login", async (req, res) => {
  * @param {string} message - message sent.
  */
 function sendResponse(res, statusCode, message) {
-  res.status(statusCode).type('text').send(message);
+  res.status(statusCode)
+    .type('text')
+    .send(message);
 }
 
 /**
@@ -158,12 +158,10 @@ function sendResponse(res, statusCode, message) {
  */
 app.post("/setcharacter", async (req, res) => {
   const prettyPrint = 4;
-  const { username, character, level, img } = req.body;
+  const {username, character, level, img} = req.body;
 
   if (!username || !character || !img || !level) {
-    res.status(bad)
-      .type('text')
-      .send("Missing body params");
+    sendResponse(res, bad, "Missing body params");
   }
 
   try {
