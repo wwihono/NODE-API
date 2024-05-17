@@ -48,6 +48,7 @@
   async function openSelectionWindow() {
     const container = id("sanrio-container");
     qs("form").classList.add("hidden");
+    qs("#home-btn").textContent = "logout";
     
     fetch("/getSanrio")
       .then(statusCheck)
